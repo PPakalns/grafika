@@ -29,7 +29,11 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"
         -Wstrict-aliasing=2 -Wswitch-default \
         -Wswitch-enum \
         -Wunreachable-code -Wunused \
-        -Wunused-parameter \
+        -Wunused-parameter -Wunused-value\
+        -Wunused-function \
+        -Wunused-label \
+        -Wunused-value \
+        -Wunused-variable \
         -Wvariadic-macros \
         -Wwrite-strings")
     set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
@@ -55,5 +59,8 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 # DisplayImage example from OpenCV
+include_directories(${CMAKE_SOURCE_DIR})
+add_subdirectory(core)
 add_subdirectory(test)
+add_subdirectory(1A)
 
