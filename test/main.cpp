@@ -13,8 +13,8 @@ int main(int argc, char** argv )
         return -1;
     }
     Mat image;
-    image = imread( argv[1], 1 );
-    if ( !image.data )
+    image = imread(argv[1], CV_LOAD_IMAGE_COLOR);
+    if (!image.data)
     {
         printf("No image data \n");
         return -1;

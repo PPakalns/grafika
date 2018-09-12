@@ -34,3 +34,7 @@
 
 # Build directory
 build
+
+# YCM config file
+.ycm_extra_conf.py
+compile_commands.json
