@@ -1,7 +1,10 @@
 cmake_minimum_required(VERSION 3.10)
 
 project(DATZ3073)
-find_package(OpenCV REQUIRED )
+find_package(OpenCV REQUIRED)
+# find_package(OpenGL REQUIRED)
+# find_package(GLUT REQUIRED)
+find_package(Gnuplot REQUIRED)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_STANDARD 11)
@@ -11,7 +14,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"
    OR CMAKE_COMPILER_IS_GNUCXX)
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
-        -O2 -Wall -Weffc++ -pedantic  \
+        -O2 -Wall -pedantic  \
         -pedantic-errors -Wextra -Wcast-align \
         -Wcast-qual -Wconversion \
         -Wdisabled-optimization \
@@ -63,4 +66,5 @@ include_directories(${CMAKE_SOURCE_DIR})
 add_subdirectory(core)
 add_subdirectory(test)
 add_subdirectory(1A)
+add_subdirectory(third_party)
 
