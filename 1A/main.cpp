@@ -13,8 +13,7 @@ void OutputChannel(GnuplotPipe& gnuPlot, cv::Mat& mat, int channel)
         cv::Vec3b *cRow = mat.ptr<cv::Vec3b>(i);;
         for (int j = 0; j < mat.cols; j++, cRow++)
         {
-            gnuPlot << i << " " << j << " " << static_cast<int>((*cRow)[channel]);
-            gnuPlot.endLine();
+            gnuPlot << i << " " << j << " " << static_cast<int>((*cRow)[channel]) << "\n";
         }
     }
     gnuPlot.sendEndOfData();
