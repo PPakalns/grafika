@@ -39,12 +39,14 @@ cv::Mat core::ReadImage(int argc, char** argv)
 
 std::string core::ReadFile(const std::string path)
 {
-	std::string content;
 	std::ifstream stream(path, std::ios::in);
 	if(stream.is_open()){
-		std::stringstream sstr;
-		sstr << stream.rdbuf();
-        return sstr.str();
+        stream.seekg(0, stream.end);
+        auto length = stream.tellg();
+        stream.seekg(0, stream.beg);
+        std::vector<char> source(static_cast<size_t>(length));
+        stream.read(source.data(), length);
+        return std::string(source.begin(), source.end());
 	}else{
         throw GrafikaException("Failed to read file" + path);
 	}
