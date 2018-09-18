@@ -29,4 +29,6 @@ namespace core{
     int CatchExceptions(MainFunc func, int argc, char** argv);
 
     cv::Mat ReadImage(int argc, char** argv);
+
+    std::string ReadFile(const std::string path);
 }

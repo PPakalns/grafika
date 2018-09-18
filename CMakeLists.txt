@@ -2,7 +2,10 @@ cmake_minimum_required(VERSION 3.10)
 
 project(DATZ3073)
 find_package(OpenCV REQUIRED)
-# find_package(OpenGL REQUIRED)
+find_package(OpenGL REQUIRED)
+find_package(GLEW REQUIRED)
+find_package(glm REQUIRED)
+find_package(glfw3 REQUIRED)
 # find_package(GLUT REQUIRED)
 find_package(Gnuplot REQUIRED)
 
@@ -67,4 +70,5 @@ add_subdirectory(core)
 add_subdirectory(test)
 add_subdirectory(1A)
 add_subdirectory(third_party)
+add_subdirectory(2_1B)
 
