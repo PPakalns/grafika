@@ -30,5 +30,16 @@ namespace core{
 
     cv::Mat ReadImage(int argc, char** argv, int flags = CV_LOAD_IMAGE_COLOR);
 
+    class ImageWindow {
+        std::string title;
+        bool waitKey, waitOnStartup;
+    public:
+        ImageWindow(const std::string& title,
+                    const cv::Mat& mat,
+                    bool waitKey = true,
+                    bool waitOnStartup = false);
+        ~ImageWindow();
+    };
+
     std::string ReadFile(const std::string path);
 }

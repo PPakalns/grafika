@@ -23,11 +23,7 @@ int safe_main(int argc, char** argv)
 {
     cv::Mat image = core::ReadImage(argc, argv);
 
-    cv::namedWindow(argv[1]);
-    cv::imshow(argv[1], image);
-    std::cout << "Press key when focusing image to continue" << std::endl;
-    cv::waitKey(0);
-    cv::destroyWindow(argv[1]);
+    core::ImageWindow(argv[1], image);
 
     GnuplotPipe gnuPlot[3];
     for (int i = 0; i < 3; i++)

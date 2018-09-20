@@ -29,7 +29,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"
         -Wlong-long \
         -Wmissing-field-initializers -Wmissing-format-attribute   \
         -Wmissing-include-dirs -Wmissing-noreturn \
-        -Wpacked  -Wpadded -Wpointer-arith \
+        -Wpacked  -Wpointer-arith \
         -Wredundant-decls \
         -Wshadow -Wstack-protector \
         -Wstrict-aliasing=2 -Wswitch-default \

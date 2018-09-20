@@ -52,3 +52,33 @@ std::string core::ReadFile(const std::string path)
 	}
 }
 
+core::ImageWindow::ImageWindow(const std::string& titleArg,
+                               const cv::Mat& mat,
+                               bool waitKeyArg,
+                               bool waitOnStartupArg)
+    : title(titleArg)
+    , waitKey(waitKeyArg)
+    , waitOnStartup(waitOnStartupArg)
+{
+    cv::namedWindow(title, cv::WINDOW_NORMAL);
+    cv::resizeWindow(title, 1024, 768);
+    cv::imshow(title, mat);
+
+    if (waitOnStartup && waitKey)
+    {
+        std::cout << "Press any key when focusing window to close it" << std::endl;
+        cv::waitKey();
+        this->waitKey = false;
+    }
+}
+
+core::ImageWindow::~ImageWindow()
+{
+    if (waitKey)
+    {
+        std::cout << "Press any key when focusing window to close it" << std::endl;
+        cv::waitKey();
+    }
+    cv::destroyWindow(title);
+}
+
