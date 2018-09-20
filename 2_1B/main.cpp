@@ -10,7 +10,7 @@
 #include <core/Utility.h>
 #include <glwrap/Utility.h>
 
-const int MAX_PARTICLES = 50000;
+const int MAX_PARTICLES = 66666;
 const size_t PARTICLE_SIZE = 3;
 
 GLfloat particlePos[PARTICLE_SIZE * MAX_PARTICLES];
@@ -36,9 +36,9 @@ struct Particle {
         p += s * dt;
         if (p.y < -1.0f) {
             p = glm::vec3(0.0f, -0.5f, 0.0f);
-            s = glm::vec3(std::uniform_real_distribution(2.0f, 4.0f)(gen),
-                          std::uniform_real_distribution(10.0f, 20.0f)(gen),
-                          std::uniform_real_distribution(2.0f, 4.0f)(gen));
+            s = glm::vec3(std::normal_distribution(3.0f, 0.5f)(gen),
+                          std::normal_distribution(15.0f,1.0f)(gen),
+                          std::normal_distribution(3.0f, 0.5f)(gen));
         }
         toArray(speed, s);
         toArray(pos, p);
@@ -136,8 +136,8 @@ int safe_main(int, char**)
         size_t elems = sizeof(gColorBufferData) / sizeof(GLfloat);
         for (size_t i = 0; i < elems; i += 3)
         {
-            gColorBufferData[i] = std::uniform_real_distribution(0.3f, 0.6f)(generator);
-            gColorBufferData[i + 1] = std::uniform_real_distribution(0.3f, 0.6f)(generator);
+            gColorBufferData[i] = std::uniform_real_distribution(0.4f, 0.6f)(generator);
+            gColorBufferData[i + 1] = std::uniform_real_distribution(0.4f, 0.6f)(generator);
             gColorBufferData[i + 2] = std::uniform_real_distribution(0.8f, 1.0f)(generator);
         }
     }
