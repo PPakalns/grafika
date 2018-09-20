@@ -19,7 +19,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
         -O2 -Wall -pedantic  \
         -pedantic-errors -Wextra -Wcast-align \
-        -Wcast-qual -Wconversion \
+        -Wcast-qual \
         -Wdisabled-optimization \
         -Werror -Wfloat-equal -Wformat=2 \
         -Wformat-nonliteral -Wformat-security  \
@@ -72,4 +72,5 @@ add_subdirectory(test)
 add_subdirectory(1A)
 add_subdirectory(third_party)
 add_subdirectory(2_1B)
+add_subdirectory(2_2A)
 

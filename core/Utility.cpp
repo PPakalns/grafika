@@ -16,7 +16,7 @@ int core::CatchExceptions(MainFunc func, int argc, char** argv)
     }
 }
 
-cv::Mat core::ReadImage(int argc, char** argv)
+cv::Mat core::ReadImage(int argc, char** argv, int flags)
 {
     if (argc < 2)
     {
@@ -25,7 +25,7 @@ cv::Mat core::ReadImage(int argc, char** argv)
         throw GrafikaException(oss.str());
     }
 
-    cv::Mat image = cv::imread(argv[1]);
+    cv::Mat image = cv::imread(argv[1], flags);
 
     if (image.data == nullptr)
     {
