@@ -104,12 +104,9 @@ struct HorizontalSegment{
     {
         if (x >= xPos)
             return;
-        if (x + 1 == xPos)
-        {
-            y += a;
-            ++x;
-            return;
-        }
+        // x + 1 == xPos
+        y += a;
+        ++x;
     }
 };
 
