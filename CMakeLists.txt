@@ -26,7 +26,6 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"
         -Wformat-y2k \
         -Wimport  -Winit-self  -Winline \
         -Winvalid-pch   \
-        -Wlong-long \
         -Wmissing-field-initializers -Wmissing-format-attribute   \
         -Wmissing-include-dirs -Wmissing-noreturn \
         -Wpacked  -Wpointer-arith \
@@ -73,4 +72,5 @@ add_subdirectory(1A)
 add_subdirectory(third_party)
 add_subdirectory(2_1B)
 add_subdirectory(2_2A)
+add_subdirectory(3D)
 
