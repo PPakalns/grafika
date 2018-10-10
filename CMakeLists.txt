@@ -9,6 +9,7 @@ find_package(glfw3 REQUIRED)
 # find_package(GLUT REQUIRED)
 find_package(Gnuplot REQUIRED)
 
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_STANDARD 11)
 
@@ -48,29 +49,43 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"
 endif()
 
 # Dummy target for compile argument database
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+if(NOT WIN32)
+	set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_custom_target(compile_commands ALL
-    DEPENDS ${CMAKE_SOURCE_DIR}/compile_commands.json)
+	add_custom_target(compile_commands ALL
+		DEPENDS ${CMAKE_SOURCE_DIR}/compile_commands.json)
 
-add_custom_command(
-    OUTPUT ${CMAKE_SOURCE_DIR}/compile_commands.json
-    COMMAND cp ${CMAKE_BINARY_DIR}/compile_commands.json ${CMAKE_SOURCE_DIR}
-    DEPENDS ${CMAKE_BINARY_DIR}/compile_commands.json
-    )
+	add_custom_command(
+		OUTPUT ${CMAKE_SOURCE_DIR}/compile_commands.json
+		COMMAND cp ${CMAKE_BINARY_DIR}/compile_commands.json ${CMAKE_SOURCE_DIR}
+		DEPENDS ${CMAKE_BINARY_DIR}/compile_commands.json
+		)
+endif()
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
-# DisplayImage example from OpenCV
 include_directories(${CMAKE_SOURCE_DIR})
+include_directories(${GLEW_INCLUDE_DIRS})
+include_directories(${GLM_INCLUDE_DIRS})
 add_subdirectory(core)
 add_subdirectory(glwrap)
-add_subdirectory(test)
 add_subdirectory(1A)
 add_subdirectory(third_party)
 add_subdirectory(2_1B)
 add_subdirectory(2_2A)
 add_subdirectory(3D)
 
+# DisplayImage example from OpenCV
+add_subdirectory(test)
+
+if(WIN32)
+add_custom_target(dll_fixup ALL)
+add_custom_command(TARGET dll_fixup POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy
+		${OpenCV_DIR}/x64/vc15/bin/opencv_world343.dll
+		${glfw3_DIR}/../../glfw3.dll
+		${GLEW_DIR}/glew32.dll
+		${CMAKE_SOURCE_DIR}/1A/1a.py
+		"${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>")
+endif()

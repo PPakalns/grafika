@@ -24,6 +24,11 @@
 #include <iostream>
 #include <fstream>
 
+#ifdef WIN32
+	#define popen _popen
+	#define pclose _pclose
+#endif
+
 class GnuplotPipe {
 public:
     inline GnuplotPipe(bool persist = false) {
