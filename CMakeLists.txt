@@ -75,6 +75,7 @@ add_subdirectory(third_party)
 add_subdirectory(2_1B)
 add_subdirectory(2_2A)
 add_subdirectory(3D)
+add_subdirectory(4A)
 
 # DisplayImage example from OpenCV
 add_subdirectory(test)
