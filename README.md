@@ -19,6 +19,7 @@ Izpildot python3 lietotni nepieciešams uzstādīt šādas pakotnes: `numpy`, `m
 Abas programmas izzīmē katram krāsas kanālam 3d grafiku, kurš sastāv no punktiem, kur katrs punkts attēlo attiecīgā pikseļa krāsas intensitāti. Natīvā lietotne izzīmē punktu diagrammu, python lietone izzīmē stabiņu diagrammu.
 
 Pieejami testa attēli:
+* `test_images/small/unequalized.jpg`
 * `test_images/small/3991273.jpg`
 * `test_images/small/rainbow.jpg`
 * `test_images/small/pallete.jpg`
@@ -86,4 +87,35 @@ Dodekaedram tiek pielietotas dažādas ģeometriskās transformācijas ar nejau�
 Tas tiks izzīmēts uz ekrāna vispirms ortogrāfiskajā projekcijā, pēc tam perspektīvā projekcijā.
 
 Programmu var izpildīt vairākas reizes, lai novērotu dažādās dodekaedram pielietotās transformācijas.
+
+#### 4A - Dodekaedra karkasa modeļa galvenās ģeometriskās transformācijas matricu formā
+
+__Lietošana:__
+```sh
+4a.exe
+```
+
+Dodekaedram tiek pielietotas dažādas ģeometriskās transformācijas ar nejauša lieluma parametriem.
+Tas tiks izzīmēts uz ekrāna vispirms ortogrāfiskajā projekcijā, pēc tam perspektīvā projekcijā.
+
+Programmu var izpildīt vairākas reizes, lai novērotu dažādās dodekaedram pielietotās transformācijas.
+
+#### 8B - Histogrammas vienmērīgošana
+
+__Lietošana:__
+```sh
+8b.exe <ceļš uz bildi>
+```
+
+Labs piemērs:
+```
+8b.exe test_images/small/unequalized.jpg
+```
+
+Programma izvada šāda veida attēlus:
+1) Oriģinālais RGB attēls,
+2) Attēls, kas iegūts pielietojot Opencv histogrammas vienmērīgošanu YCbCr krāsu telpā luminiscences kanālam.
+3) Attēls, kas iegūts pielietojot Paša realizētu histogrammas vienmērīgošanu YCbCr krāsu telpā luminiscences kanālam.
+
+Testēšanai var pielietot *1A* punktā izmantotos testa attēlus.
 
