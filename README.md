@@ -19,6 +19,7 @@ Izpildot python3 lietotni nepieciešams uzstādīt šādas pakotnes: `numpy`, `m
 Abas programmas izzīmē katram krāsas kanālam 3d grafiku, kurš sastāv no punktiem, kur katrs punkts attēlo attiecīgā pikseļa krāsas intensitāti. Natīvā lietotne izzīmē punktu diagrammu, python lietone izzīmē stabiņu diagrammu.
 
 Pieejami testa attēli:
+* `test_images/small/3991273.jpg`
 * `test_images/small/rainbow.jpg`
 * `test_images/small/pallete.jpg`
 * `test_images/small/gradient.jpg`
@@ -73,3 +74,16 @@ Testa faili:
 * `test_files/3d.in3` - izzīmē daļēji redzamu daudzstūri, kas pats sevi krusto,
 * `test_files/3d.in4` - izzīmē taisnstūri, kas pilnībā iekļauj izzīmēto reģionu,
 * `test_files/3d.in5` - izzīmē daļēji redzamu daudzstūri, kas pats sevi krusto.
+
+#### 4A - Dodekaedra karkasa modeļa galvenās ģeometriskās transformācijas matricu formā
+
+__Lietošana:__
+```sh
+4a.exe
+```
+
+Dodekaedram tiek pielietotas dažādas ģeometriskās transformācijas ar nejauša lieluma parametriem.
+Tas tiks izzīmēts uz ekrāna vispirms ortogrāfiskajā projekcijā, pēc tam perspektīvā projekcijā.
+
+Programmu var izpildīt vairākas reizes, lai novērotu dažādās dodekaedram pielietotās transformācijas.
+
