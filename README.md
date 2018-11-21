@@ -88,18 +88,6 @@ Tas tiks izzīmēts uz ekrāna vispirms ortogrāfiskajā projekcijā, pēc tam p
 
 Programmu var izpildīt vairākas reizes, lai novērotu dažādās dodekaedram pielietotās transformācijas.
 
-#### 4A - Dodekaedra karkasa modeļa galvenās ģeometriskās transformācijas matricu formā
-
-__Lietošana:__
-```sh
-4a.exe
-```
-
-Dodekaedram tiek pielietotas dažādas ģeometriskās transformācijas ar nejauša lieluma parametriem.
-Tas tiks izzīmēts uz ekrāna vispirms ortogrāfiskajā projekcijā, pēc tam perspektīvā projekcijā.
-
-Programmu var izpildīt vairākas reizes, lai novērotu dažādās dodekaedram pielietotās transformācijas.
-
 #### 8B - Histogrammas vienmērīgošana
 
 __Lietošana:__
