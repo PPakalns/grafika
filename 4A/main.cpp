@@ -247,8 +247,9 @@ cv::Mat DrawImage(const std::vector<std::tuple<Vec4<double>, Vec4<double>>>& edg
 
     cv::Mat screen = cv::Mat::zeros({SW, SW}, CV_8U);
 
-    auto toPoint = [](Vec4<double> vec) {
-        return cv::Point((0.5 + vec.val[0]) * SW, (0.5 + vec.val[1]) * SW);
+    auto toPoint = [&](Vec4<double> vec) {
+        return cv::Point(static_cast<int>((0.5 + vec.val[0]) * SW), 
+                         static_cast<int>((0.5 + vec.val[1]) * SW));
     };
 
     for (const auto& e : edges)

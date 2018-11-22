@@ -31,7 +31,7 @@ cv::Mat equalizeHist(cv::Mat image)
     unsigned int prefixSum = pixelCount[minval];
     for (size_t i = minval + 1; i < maxval; i++)
     {
-        mapTo[i] = (prefixSum + pixelCount[i] / 2.0) / total;
+        mapTo[i] = (prefixSum + pixelCount[i] / 2.0f) / total;
         prefixSum += pixelCount[i];
     }
 
