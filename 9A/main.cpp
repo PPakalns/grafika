@@ -44,6 +44,7 @@ cv::Mat applyFilterOnImage(cv::Mat image, cv::Mat filter)
     res.convertTo(res, CV_8UC3);
     cv::Mat shiftedOutput(res.size(), CV_8UC3);
 
+    // Shift image
     int shiftX = filter.cols / 2;
     int shiftY = filter.rows / 2;
     for (int r = 0, tr = res.rows - shiftY; r < res.rows; r++, tr++)
@@ -59,17 +60,47 @@ cv::Mat applyFilterOnImage(cv::Mat image, cv::Mat filter)
             memcpy(shiftedOutput.at<char[3]>(tr, tc), res.at<char[3]>(r, c), sizeof(char[3]));
         }
     }
+
     return shiftedOutput;
 }
 
-cv::Mat blurFilter(long long size)
+cv::Mat avgBlurFilter(long long r)
 {
-    if (size <= 0 || (size & 1) == 0)
-    {
-        throw GrafikaException("Blur filter size must be an odd positive integer");
-    }
+    assert(r >= 0);
+    auto size = 2 * r + 1;
 
     return cv::Mat::ones(size, size, CV_32F) / (size * size);
+}
+
+cv::Mat gaussianBlurFilter(long long radius, double sigma)
+{
+    assert(r >= 0);
+    long long size = 2 * radius + 1;
+    double bmult = 2 * sigma * sigma;
+
+    cv::Mat tmp(size, size, CV_32F);
+    for (int r = 0; r < tmp.rows; r++)
+    {
+        for (int c = 0; c < tmp.cols; c++)
+        {
+            auto dx = radius - r;
+            auto dy = radius - c;
+            auto dd = dx * dx + dy * dy;
+            tmp.at<float>(r, c) = exp(-dd/bmult);
+        }
+    }
+    double sum = cv::sum(tmp)[0];
+    return tmp / sum;
+}
+
+cv::Mat testOffsetFilter(long long r)
+{
+    assert(r >= 0);
+    auto size = 2 * r + 1;
+
+    cv::Mat test = cv::Mat::zeros(size, size, CV_32F);
+    test.at<float>(size / 2, size / 2) = 1.0;
+    return test;
 }
 
 int safe_main(int argc, char** argv)
@@ -78,15 +109,20 @@ int safe_main(int argc, char** argv)
 
     core::ImageWindow(argv[1], image);
 
-    cv::Mat test = cv::Mat::ones(3, 3, CV_32F);
-    test /= test.rows * test.cols;
+    int avgR = std::atoi(argv[2]);
+    int gaussianR = std::atoi(argv[3]);
+    int sigma = std::atoi(argv[4]);
+    // int sharpR = std::atoi(argv[4]);
 
     cv::Mat res;
-    res = applyFilterOnImage(image, blurFilter(15));
-    core::ImageWindow(argv[1], res);
+    res = applyFilterOnImage(image, avgBlurFilter(avgR));
+    core::ImageWindow("Videjas vertibas izpludināšanas filtrs", res);
 
-    res = applyFilterOnImage(image, blurFilter(201));
-    core::ImageWindow(argv[1], res);
+    res = applyFilterOnImage(image, gaussianBlurFilter(gaussianR, sigma));
+    core::ImageWindow("Gausa izpludināšanas filtrs", res);
+
+    // res = applyFilterOnImage(image, sharpBlurFilter(sharpR));
+    // core::ImageWindow("Assināšanas filtrs", res);
 
     return 0;
 }
