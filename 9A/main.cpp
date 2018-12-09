@@ -72,7 +72,7 @@ cv::Mat avgBlurFilter(long long r)
     return cv::Mat::ones(size, size, CV_32F) / (size * size);
 }
 
-cv::Mat gaussianBlurFilter(long long radius, double sigma)
+cv::Mat gaussianBlurFilter(long long radius, float sigma)
 {
     assert(r >= 0);
     long long size = 2 * radius + 1;
@@ -107,12 +107,18 @@ int safe_main(int argc, char** argv)
 {
     cv::Mat image{core::ReadImage(argc, argv)};
 
+    if (argc < 7)
+    {
+        throw GrafikaException("Usage: ./9a path_to_image avg_filter_radius gaussian_filter_radius gaussian_filter_sigma sharpen_filter_radiusu alpha");
+    }
+
     core::ImageWindow(argv[1], image);
 
     int avgR = std::atoi(argv[2]);
     int gaussianR = std::atoi(argv[3]);
-    int sigma = std::atoi(argv[4]);
-    // int sharpR = std::atoi(argv[4]);
+    float sigma = std::atof(argv[4]);
+    int sharpR = std::atoi(argv[5]);
+    float coefAlfa = std::atof(argv[6]);
 
     cv::Mat res;
     res = applyFilterOnImage(image, avgBlurFilter(avgR));
@@ -121,8 +127,17 @@ int safe_main(int argc, char** argv)
     res = applyFilterOnImage(image, gaussianBlurFilter(gaussianR, sigma));
     core::ImageWindow("Gausa izpludināšanas filtrs", res);
 
-    // res = applyFilterOnImage(image, sharpBlurFilter(sharpR));
-    // core::ImageWindow("Assināšanas filtrs", res);
+    // Sharp filter
+    res = applyFilterOnImage(image, avgBlurFilter(sharpR));
+    res = (1 + coefAlfa) * image - coefAlfa * res;
+    core::ImageWindow("Assināšanas filtrs", res);
+
+    // Blur and then sharpen image
+    image = applyFilterOnImage(image, gaussianBlurFilter(gaussianR, sigma));
+    core::ImageWindow("Izpludināta bilde testam ar gausa filtru pirms assināšanas", image);
+    res = applyFilterOnImage(image, avgBlurFilter(sharpR));
+    res = (1 + coefAlfa) * image - coefAlfa * res;
+    core::ImageWindow("Izpludinātā bilde pēc asināšanas", res);
 
     return 0;
 }
