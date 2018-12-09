@@ -83,6 +83,8 @@ int safe_main(int argc, char** argv)
 
     cv::Mat corr = MakeCorrelation(image, mask);
     core::ImageWindow("Korelācija", corr);
+    cv::threshold(corr, corr, 0.8, 0, 3);
+    core::ImageWindow("Korelācija tresholded", corr);
     return 0;
 }
 
