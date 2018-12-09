@@ -28,7 +28,7 @@ using MainFunc = int(*)(int, char**);
 namespace core{
     int CatchExceptions(MainFunc func, int argc, char** argv);
 
-    cv::Mat ReadImage(int argc, char** argv, int flags = CV_LOAD_IMAGE_COLOR);
+    cv::Mat ReadImage(int argc, char** argv, int flags = CV_LOAD_IMAGE_COLOR, int argpos = 1);
 
     class ImageWindow {
         std::string title;

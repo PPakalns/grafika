@@ -16,21 +16,21 @@ int core::CatchExceptions(MainFunc func, int argc, char** argv)
     }
 }
 
-cv::Mat core::ReadImage(int argc, char** argv, int flags)
+cv::Mat core::ReadImage(int argc, char** argv, int flags, int argpos)
 {
-    if (argc < 2)
+    if (argc <= argpos)
     {
         std::ostringstream oss;
-        oss << "Usage: " << argv[0] << " <path to image>\n";
+        oss << "Usage: Argument" << argpos << " must provide path to image\n";
         throw GrafikaException(oss.str());
     }
 
-    cv::Mat image = cv::imread(argv[1], flags);
+    cv::Mat image = cv::imread(argv[argpos], flags);
 
     if (image.data == nullptr)
     {
         std::ostringstream oss;
-        oss << "Failed to read image " << argv[1] << "\n";
+        oss << "Failed to read image " << argv[argpos] << "\n";
         throw GrafikaException(oss.str());
     }
 
