@@ -107,3 +107,48 @@ Programma izvada šāda veida attēlus:
 
 Testēšanai var pielietot *1A* punktā izmantotos testa attēlus.
 
+
+#### 9a - Izpludināšana, assināšana ar dažāda izmēra filtriem
+
+```sh
+./9a path_to_image avg_filter_radius gaussian_filter_radius gaussian_filter_sigma sharpen_filter_radius sharpen_alpha
+```
+
+Piemēri:
+```sh
+./9a.exe ./test_images/small/3991273.jpg 3 3 0.7 3 3
+./9a.exe ./test_images/small/3991273.jpg 30 30 6 30 30
+```
+
+Programma attēlo:
+1. Ievadā doto attēlu,
+2. Attēlu izplidinātu ar vidējās vērtības filtru (filtra rādiuss: avg_filter_radius)
+3. Attēlu izpludinātu ar gausa filtru (rādiuss: gaussian_filter_radius, sigma: gaussian_filter_sigma)
+4. Assinātu attēlu, kur izpludinātais attēls iegūts ar vidējās vērtības filtru (rādius: sharpen_filter_radius), 
+   asināšanas koeficients: sharpen_alpha.
+5. Attēlu izpludinātu, kam pielietots gausa filtrs ar 3. soļa konstantēm.
+6. Assinātu 5. soļa attēlu ar 4. solī aprakstītajām konstantēm.
+
+
+#### 11_1A - Divu krāsainu attēlu normalizēta korelācija
+
+```sh
+./11_1a.exe Ceļš_uz_attēlu Ceļš_uz_meklējamo_attēlu
+```
+
+Piemēri:
+```sh
+./11_1a.exe ./test_images/correlation/text.jpg ./test_images/correlation/a.jpg
+./11_1a.exe ./test_images/correlation/comet.jpg ./test_images/correlation/comet_search.jpg
+./11_1a.exe ./test_images/correlation/asian_friendly.jpg ./test_images/correlation/asian_friendly_part.jpg
+```
+
+Programma attēlo:
+1. Meklējamo attēla fragmentu,
+2. Doto attēlu,
+3. Luminiscences normalizēta korelācija,
+4. Cb kanāla normalizēta korelācija,
+5. Cr kanāla normalizēta korelācija, 
+	* Korelāciju uz attēlu pārkonvertētu YCbCr fromātā, jo uz tā novēroju vislabākos rezultātus.
+5. Krāsaino attēlu normalizēta korelācija - korelāciju rezultātu veidotā trīsdimensiju vektoru normalizēti garumi.
+6. 5. soļa attēls ar 80% slieksni.
