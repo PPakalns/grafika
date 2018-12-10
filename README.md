@@ -150,5 +150,5 @@ Programma attēlo:
 4. Cb kanāla normalizēta korelācija,
 5. Cr kanāla normalizēta korelācija, 
 	* Korelāciju uz attēlu pārkonvertētu YCbCr fromātā, jo uz tā novēroju vislabākos rezultātus.
-5. Krāsaino attēlu normalizēta korelācija - korelāciju rezultātu veidotā trīsdimensiju vektoru normalizēti garumi.
-6. 5. soļa attēls ar 80% slieksni.
+6. Krāsaino attēlu normalizēta korelācija - korelāciju rezultātu veidotā trīsdimensiju vektoru normalizēti garumi.
+7. Korelācijas attēlu (6. soļa) ar 80% sliekšņošanu.
