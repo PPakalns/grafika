@@ -22,9 +22,11 @@ static cv::Mat MakeCorrelation(cv::Mat image, cv::Mat mask)
     cv::Mat res = cv::Mat::zeros(image.rows, image.cols, CV_32F);
     for (int i = 0; i < 3; i++)
     {
-        auto meanval = cv::mean(lmask[i]);
-        limage[i] -= meanval;
-        lmask[i] -= meanval;
+        limage[i] /= 255;
+        lmask[i] /= 255;
+        auto mean = cv::mean(lmask[i]);
+        limage[i] -= mean;
+        lmask[i] -= mean;
 
         cv::Mat ilayer, flayer;
         cv::copyMakeBorder(lmask[i], flayer,
@@ -37,7 +39,12 @@ static cv::Mat MakeCorrelation(cv::Mat image, cv::Mat mask)
         cv::dft(ilayer, ilayer);
         cv::dft(flayer, flayer);
         cv::mulSpectrums(ilayer, flayer, ilayer, 0);
-        cv::dft(ilayer, ilayer, cv::DFT_INVERSE | cv::DFT_REAL_OUTPUT);
+        cv::dft(ilayer, ilayer, cv::DFT_INVERSE);
+        
+        std::vector<cv::Mat> tmp(2);
+        cv::split(ilayer, tmp);
+        ilayer = tmp[0];
+
         assert(ilayer.type() == CV_32F);
 
         // Show output for spewcific layer
@@ -45,12 +52,9 @@ static cv::Mat MakeCorrelation(cv::Mat image, cv::Mat mask)
         cv::normalize(ilayer, outputForLayer, 0, 1, CV_MINMAX);
         core::ImageWindow("Layer " + std::to_string(i), outputForLayer);
 
-        cv::pow(ilayer, 2, ilayer);
         res += ilayer;
     }
 
-    // Calculate length of vector in three dimensions
-    cv::sqrt(res, res);
     cv::Mat shiftedOutput(res.size(), CV_32F);
     // Shift image
     int shiftX = mask.cols / 2;
@@ -83,6 +87,8 @@ int safe_main(int argc, char** argv)
     cv::Mat corr = MakeCorrelation(image, mask);
     core::ImageWindow("Korelācija", corr);
     cv::threshold(corr, corr, 0.8, 0, 3);
+    corr.convertTo(mask, CV_8U);
+    cv::normalize(corr, corr, 0, 1, CV_MINMAX, -1, mask);
     core::ImageWindow("Korelācija tresholded", corr);
     return 0;
 }
