@@ -15,7 +15,6 @@ static cv::Mat MakeCorrelation(cv::Mat image, cv::Mat mask)
         cv::Mat fimage, fmask;
         image.convertTo(fimage, CV_32FC3);
         mask.convertTo(fmask, CV_32FC3);
-        cv::flip(fmask, fmask, -1); // Both axis
         cv::split(fimage, limage);
         cv::split(fmask, lmask);
     }
